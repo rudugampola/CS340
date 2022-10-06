@@ -1,0 +1,119 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* GLOBAL */
+
+html {
+    min-height: 100%;
+}
+
+body {
+    /*rgb(198, 236, 248)  */
+    background: linear-gradient(to left bottom, rgb(198, 236, 248), rgb(255, 255, 255));
+    color: #184b5a;
+    margin: 1%;
+    font-size: 16px;
+    height: 100%;
+}
+
+.main-table {
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.main-table tr th {
+    background-color: rgb(248, 248, 227);
+}
+
+.main-table th,
+td {
+    border: 1px solid gray;
+    height: 20px;
+    width: 160px;
+    text-align: center;
+}
+
+.main-table tr:nth-child(odd) td {
+    background-color: rgb(247, 247, 240);
+}
+
+.main-table tr:nth-child(even) td {
+    background-color: rgb(241, 235, 235);
+}
+
+p {
+    /* border: 1px solid red; */
+}
+
+h3 {
+    margin-bottom: 3px;
+    /* border: 1px solid red; */
+    margin: 0px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* NAV BAR */
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title img {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* PAGES */
+
+.form-btns {
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.sub-table {
+    margin-left: 10px;
+    border: none;
+}
+
+.sub-table td {
+    border: none;
+}
+
+.section {
+    width: 550px;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.h3-create {
+    margin-bottom: 10px;
+}
+
+.errorBox {
+    width: 550px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.errorMsg {
+    margin: auto;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* FORMS */
+
+select {
+    width: 150px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+    width: 143px;
+}
+
+textarea {
+    width: 143px;
+}

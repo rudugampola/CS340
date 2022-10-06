@@ -1,0 +1,65 @@
+{{! Create a table }}
+<table id='customers-table'>
+
+  {{! Header section }}
+  <thead>
+
+    {{! For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders }}
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Photo</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  {{! Body section }}
+  <tbody>
+
+    {{! For each row, print the id, fname, lname, homeworld and age, in order }}
+    {{#each data}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.fname}}</td>
+        <td>{{this.lname}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.photo}}</td>
+        <td><button onclick="deleteCustomer({{this.id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script src="/js/delete.js"></script>
+
+
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new person, please enter their information below nad click `Submit`!</p>
+<form id='add-customer-form' method='POST' action='/add-customer-form'>
+  <label for='input-fname'>First Name: </label>
+  <input type='text' name='input-fname' id='input-fname' />
+
+  <label for='input-lname'>Last Name: </label>
+  <input type='text' name='input-lname' id='input-lname' />
+
+  <label for='input-phone'>Phone Number: </label>
+  <input
+    type='tel'
+    name='input-phone'
+    id='input-phone'
+  />
+
+  <label for='input-email'>Email: </label>
+  <input type='text' name='input-email' id='input-email' />
+
+  <label for='input-photo'>Photo: </label>
+  <input type='text' name='input-photo' id='input-photo' />
+
+  <input type='submit' />
+</form>

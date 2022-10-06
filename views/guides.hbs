@@ -1,0 +1,70 @@
+{{! Create a table }}
+<table id='guides-table'>
+
+  {{! Header section }}
+  <thead>
+
+    {{! For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders }}
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Title</th>
+      <th>Photo</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  {{! Body section }}
+  <tbody>
+
+    {{! For each row, print the id, fname, lname, homeworld and age, in order }}
+    {{#each data}}
+      <tr>
+        <td>{{this.guide_id}}</td>
+        <td>{{this.guide_fname}}</td>
+        <td>{{this.guide_lname}}</td>
+        <td>{{this.guide_phone}}</td>
+        <td>{{this.guide_email}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.photo}}</td>
+        <td><button onclick="deleteGuide({{this.guide_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script src="/js/delete.js"></script>
+
+<!-- /views/index.hbs -->
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new person, please enter their information below nad click `Submit`!</p>
+<form id='add-guide-form' method='POST' action='/add-guide-form'>
+
+  <label for='input-guide-fname'>Guide First Name: </label>
+  <input type='text' name='input-guide-fname' id='input-guide-fname' />
+
+  <label for='input-guide-lname'>Guide Last Name: </label>
+  <input type='text' name='input-guide-lname' id='input-guide-lname' />
+
+  <label for='input-guide-phone'>Guide Phone: </label>
+  <input
+    type='tel'
+    name='input-guide-phone'
+    id='input-guide-phone'
+  />
+
+  <label for='input-guide-email'>Guide Email: </label>
+  <input type='text' name='input-guide-email' id='input-guide-email' />
+
+  <label for='input-title'>Guide Title: </label>
+  <input type='text' name='input-title' id='input-title' />
+
+  <label for='input-photo'>Guide Photo: </label>
+  <input type='text' name='input-photo' id='input-photo' />
+
+  <input type='submit' />
+</form>
