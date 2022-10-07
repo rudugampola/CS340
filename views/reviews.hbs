@@ -1,5 +1,5 @@
 {{! Create a table }}
-<table id='logs-table'>
+<table id='reviews-table'>
 
   {{! Header section }}
   <thead>
@@ -8,10 +8,11 @@
         know what each column means when the page renders }}
     <tr>
       <th>Id</th>
+      <th>Date</th>
+      <th>Review</th>
       <th>Customer Id</th>
-      <th>Guide Id</th>
       <th>Tour Id</th>
-      <th>Delete</th>
+      <th>Rating</th>
     </tr>
   </thead>
 
@@ -22,10 +23,12 @@
     {{#each data}}
       <tr>
         <td>{{this.id}}</td>
+        <td>{{this.date}}</td>
+        <td>{{this.review}}</td>
         <td>{{this.customer_id}}</td>
-        <td>{{this.guide_id}}</td>
         <td>{{this.tour_id}}</td>
-        <td><button onclick="deleteTrip_Logs({{this.id}})">Delete</button></td>
+        <td>{{this.rating}}</td>
+        <td><button onclick="deleteReview({{this.id}})">Delete</button></td>
       </tr>
     {{/each}}
   </tbody>
@@ -36,31 +39,32 @@
 <!-- /views/index.hbs -->
 <h2>Adding Data using an HTML form</h2>
 <p>To add a new person, please enter their information below nad click `Submit`!</p>
-<form id='add-log-form' method='POST' action='/add-log-form'>
+<form id='add-review-form' method='POST' action='/add-review-form'>
 
-    <label for='input-log-customer'>Customer: </label>
-    <select name="input-log-customer" id="input-log-customer-ajax">
+  <label for='input-date'>Review Date: </label>
+  <input type='date' name='input-date' id='input-date' />
+
+  <label for='input-review'>Review: </label>
+  <input type='text' name='input-review' id='input-review' />
+
+    <label for='input-review-customer'>Customer: </label>
+    <select name="input-review-customer" id="input-review-customer-ajax">
         <option value="">Select a Customer</option>
         {{#each results.customers}}
         <option value="{{this.id}}">{{this.lname}}, {{this.fname}} </option>
         {{/each}}
     </select>
 
-    <label for='input-log-tour'>Tour: </label>
-    <select name="input-log-tour" id="input-log-tour-ajax">
+    <label for='input-review-tour'>Tour: </label>
+    <select name="input-review-tour" id="input-review-tour-ajax">
         <option value="">Select a Tour</option>
         {{#each results.tours}}
         <option value="{{this.id}}">{{this.name}}</option>
         {{/each}}
     </select>
 
-    <label for='input-log-guide'>Guide: </label>
-    <select name="input-log-guide" id="input-log-guide-ajax">
-        <option value="">Select a Guide</option>
-        {{#each results.guides}}
-        <option value="{{this.id}}">{{this.lname}}, {{this.fname}}</option>
-        {{/each}}
-    </select>
+    <label for='input-review-rating'>Rating: </label>
+    <input type='text' name='input-review-rating' id='input-review-rating' />
 
   <input type='submit' />
 </form>
