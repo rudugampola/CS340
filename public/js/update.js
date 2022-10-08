@@ -22,13 +22,6 @@ updateCustomerForm.addEventListener('submit', function (e) {
   let customerPhoneValue = inputCustomerPhone.value;
   let customerPhotoValue = inputCustomerPhoto.value;
 
-  //   console.log(customerIDValue);
-  //   console.log(customerFNameValue);
-  //   console.log(customerLNameValue);
-  //   console.log(customerEmailValue);
-  //   console.log(customerPhoneValue);
-  //   console.log(customerPhotoValue);
-
   // Put our data we want to send in a javascript object
   let data = {
     id: customerIDValue,
@@ -52,6 +45,10 @@ updateCustomerForm.addEventListener('submit', function (e) {
     } else if (xhttp.readyState == 4 && xhttp.status != 200) {
       console.log('There was an error with the input.');
     }
+  };
+  // Force page refresh on Submit
+  xhttp.onload = function () {
+    location.reload();
   };
 
   // Send the request and wait for the response

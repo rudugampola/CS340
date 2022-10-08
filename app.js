@@ -97,6 +97,7 @@ app.delete('/delete-customer-ajax/', function (req, res, next) {
   });
 });
 
+
 app.put('/put-customer-ajax', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
