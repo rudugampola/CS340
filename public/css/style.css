@@ -116,10 +116,15 @@ select {
 
 input[type="text"],
 input[type="date"],
-input[type="time"] {
-    width: 143px;
+input[type="time"],
+input[type="number"],
+input[type="price"],
+input[type="tel"] {
+    width: 150px;
+    ;
 }
 
 textarea {
-    width: 143px;
+    width: 150px;
+    ;
 }

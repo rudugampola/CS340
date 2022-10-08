@@ -55,6 +55,8 @@ function deleteGuide(guideID) {
       deleteGuideRow(guideID);
     } else if (xhttp.readyState == 4 && xhttp.status != 204) {
       console.log('There was an error with the input.');
+      console.log(xhttp.responseText);
+      console.log(guideID);
     }
   };
 
@@ -195,22 +197,4 @@ function deleteReviewRow(reviewID) {
       break;
     }
   }
-}
-
-function updateOwner(data) {
-  let select = document.getElementById('update_customer_select');
-  let customerID = select.options[select.selectedIndex].value;
-  for (let obj in data) {
-    if (data[obj].customer_id == customerID) {
-      document.getElementById('update_lname').value =
-        data[obj].customer_last_name;
-      document.getElementById('update_fname').value =
-        data[obj].customer_first_name;
-      document.getElementById('update_phone').value =
-        data[obj].customer_phone_number;
-      document.getElementById('update_email').value = data[obj].customer_email;
-      document.getElementById('update_photo').value = data[obj].customer_photo;
-    }
-  }
-  return;
 }

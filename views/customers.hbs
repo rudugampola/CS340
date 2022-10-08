@@ -151,25 +151,32 @@
     Update Customer
   </h3>
   <form id="update-customer-form-ajax">
-    <label for="input-fullname">
-      Select a Customer to Update:
-    </label>
-    <select
-      name="input-fullname"
-      id="update-name"
-      onChange="formFill(this)"
-      required
-    >
-      <option value="test">
-        Select a Person
-      </option>
-      {{#each data}}
-        <option value="{{this.id}}">
-          {{this.fname}} {{this.lname}}
-        </option>
-      {{/each}}
-    </select>
     <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-fullname">
+            Select a Customer to Update:
+          </label>
+        </td>
+        <td>
+          <select
+            name="input-fullname"
+            id="update-name"
+            onChange="formFill(this)"
+            required
+          >
+            <option value="test">
+              Select a Customer
+            </option>
+            {{#each data}}
+              <option value="{{this.id}}">
+                {{this.fname}} {{this.lname}}
+              </option>
+            {{/each}}
+          </select>
+        </td>
+      </tr>
+
       <tr>
         <td>
           <label for="update-fname">
@@ -240,8 +247,9 @@
     </div>
   </form>
 </div>
+
 <script src="/js/delete.js"></script>
-<script src="/js/update.js"></script>
+<script src="/js/updateCustomer.js"></script>
 
 <script>
   function formFill(data) {

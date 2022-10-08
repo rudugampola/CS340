@@ -41,7 +41,7 @@ updateCustomerForm.addEventListener('submit', function (e) {
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       // Add the new data to the table
-      updateRow(xhttp.response, inputCustomerID);
+      updateCustomerRow(xhttp.response, inputCustomerID);
     } else if (xhttp.readyState == 4 && xhttp.status != 200) {
       console.log('There was an error with the input.');
     }
@@ -55,7 +55,7 @@ updateCustomerForm.addEventListener('submit', function (e) {
   xhttp.send(JSON.stringify(data));
 });
 
-function updateRow(data, personID) {
+function updateCustomerRow(data, customerID) {
   let parsedData = JSON.parse(data);
 
   let table = document.getElementById('customers-table');
@@ -63,7 +63,7 @@ function updateRow(data, personID) {
   for (let i = 0, row; (row = table.rows[i]); i++) {
     //iterate through rows
     //rows would be accessed using the "row" variable assigned in the for loop
-    if (table.rows[i].getAttribute('data-value') == personID) {
+    if (table.rows[i].getAttribute('data-value') == customerID) {
       // Get the location of the row where we found the matching person ID
       let updateRowIndex = table.getElementsByTagName('tr')[i];
 

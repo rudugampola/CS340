@@ -97,7 +97,6 @@ app.delete('/delete-customer-ajax/', function (req, res, next) {
   });
 });
 
-
 app.put('/put-customer-ajax', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
@@ -165,14 +164,16 @@ app.post('/add-tour-form', function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
 
-  //   let price = truncate(data['input-price'], 2);
-  //   if (isNaN(price)) {
-  //     price = 'NULL';
-  //   }
+  // Capture date and save as yyyy-mm-dd
+  let date = new Date(data['input-date']);
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let dateStr = `${year}-${month}-${day}`;
 
   // Create the query and run it on the database
   query1 = `INSERT INTO Tours (name, difficulty, price, description, cover_image, location, date) VALUES ('${data['input-tour-name']}', 
-  '${data['input-difficulty']}', ${data['input-price']} ,'${data['input-description']}', '${data['input-cover']}', '${data['input-location']}', '${data['input-date']}')`;
+  '${data['input-difficulty']}', '${data['input-price']}' ,'${data['input-description']}', '${data['input-cover']}', '${data['input-location']}', '${dateStr}')`;
   db.pool.query(query1, function (error, rows, fields) {
     // Check to see if there was an error
     if (error) {
@@ -213,6 +214,38 @@ app.delete('/delete-tour-ajax/', function (req, res, next) {
       });
     }
   });
+});
+
+app.put('/put-tour-ajax', function (req, res, next) {
+  let data = req.body;
+  let tourID = parseInt(data.id);
+  // console.log(customerID);
+
+  let updateTours = `UPDATE Tours SET name = ?, difficulty = ?, price = ?, description = ?, cover_image = ?, location = ?, date = ? WHERE id = ?`;
+
+  // Run query and update the database then refresh the page
+  db.pool.query(
+    updateTours,
+    [
+      data['name'],
+      data['difficulty'],
+      data['price'],
+      data['description'],
+      data['cover_image'],
+      data['location'],
+      data['date'],
+      tourID,
+    ],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      } else {
+        // set status and refresh the page
+        res.send(rows);
+      }
+    }
+  );
 });
 
 app.get('/guides', function (req, res) {
@@ -272,6 +305,37 @@ app.delete('/delete-guide-ajax/', function (req, res, next) {
       });
     }
   });
+});
+
+app.put('/put-guide-ajax', function (req, res, next) {
+  let data = req.body;
+  let guideID = parseInt(data.id);
+  // console.log(customerID);
+
+  let updateGuides = `UPDATE Guides SET fname = ?, lname = ?, phone = ?, email = ?, title = ?, photo = ? WHERE id = ?`;
+
+  // Run query and update the database then refresh the page
+  db.pool.query(
+    updateGuides,
+    [
+      data['fname'],
+      data['lname'],
+      data['phone'],
+      data['email'],
+      data['title'],
+      data['photo'],
+      guideID,
+    ],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      } else {
+        // set status and refresh the page
+        res.send(rows);
+      }
+    }
+  );
 });
 
 app.get('/triplogs', function (req, res) {

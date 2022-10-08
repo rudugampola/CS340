@@ -39,7 +39,7 @@
   <tbody>
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
-      <tr>
+      <tr data-value={{this.id}}>
         <td>
           {{this.id}}
         </td>
@@ -62,7 +62,7 @@
           {{this.photo}}
         </td>
         <td>
-          <button onclick="deleteGuide({{this.guide_id}})">
+          <button onclick="deleteGuide({{this.id}})">
             Delete
           </button>
         </td>
@@ -122,7 +122,7 @@
       <tr>
         <td>
           <label for="input-guide-phone">
-            Guide Phone:
+            Guide Phone Number:
           </label>
         </td>
         <td>
@@ -152,9 +152,6 @@
             required
           />
         </td>
-        <td>
-          *Required
-        </td>
       </tr>
 
       <tr>
@@ -165,9 +162,6 @@
         </td>
         <td>
           <input type="text" name="input-title" id="input-title" />
-        </td>
-        <td>
-          *Required
         </td>
       </tr>
 
@@ -180,8 +174,118 @@
         <td>
           <input type="text" name="input-photo" id="input-photo" />
         </td>
+      </tr>
+    </table>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>
+
+<div class="section">
+  <h3 class="h3-create">
+    Update Guide
+  </h3>
+  <form id="update-guide-form-ajax">
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-fullname">
+            Select a Guide to Update:
+          </label>
+        </td>
+        <td>
+          <select
+            name="input-fullname"
+            id="update-name"
+            onChange="formFill(this)"
+            required
+          >
+            <option value="test">
+              Select a Guide
+            </option>
+            {{#each data}}
+              <option value="{{this.id}}">
+                {{this.fname}} {{this.lname}}
+              </option>
+            {{/each}}
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-fname">
+            Guide First Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-fname" id="update-fname" required />
+        </td>
         <td>
           *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-lname">
+            Guide Last Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-lname" id="update-lname" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-phone">
+            Guide Phone Number:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-phone" id="update-phone" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-email">
+            Guide Email:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-email" id="update-email" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-title">
+            Guide Title:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-title" id="update-title" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-photo">
+            Guide Photo:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-photo" id="update-photo" />
         </td>
       </tr>
     </table>
@@ -191,3 +295,14 @@
     </div>
   </form>
 </div>
+
+<script src="/js/delete.js"></script>
+<script src="/js/updateGuide.js"></script>
+
+<script>
+  function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateGuide(id)
+    };
+</script>
