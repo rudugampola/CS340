@@ -1,65 +1,262 @@
 {{! Create a table }}
-<table id='customers-table'>
-
+<table id="customers-table" class="main-table">
+  <h2>
+    Customers
+  </h2>
   {{! Header section }}
   <thead>
-
     {{! For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders }}
     <tr>
-      <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Photo</th>
-      <th>Delete</th>
+      <th>
+        Id
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Photo
+      </th>
+      <th>
+        Delete
+      </th>
     </tr>
   </thead>
 
   {{! Body section }}
   <tbody>
-
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
       <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.fname}}</td>
-        <td>{{this.lname}}</td>
-        <td>{{this.phone}}</td>
-        <td>{{this.email}}</td>
-        <td>{{this.photo}}</td>
-        <td><button onclick="deleteCustomer({{this.id}})">Delete</button></td>
+        <td>
+          {{this.id}}
+        </td>
+        <td>
+          {{this.fname}}
+        </td>
+        <td>
+          {{this.lname}}
+        </td>
+        <td>
+          {{this.phone}}
+        </td>
+        <td>
+          {{this.email}}
+        </td>
+        <td>
+          {{this.photo}}
+        </td>
+        <td>
+          <button onclick="deleteCustomer({{this.id}})">
+            Delete
+          </button>
+        </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 
-<script src="/js/delete.js"></script>
+{{! <script type="text/javascript">
+  var s_data = [{"customer_id":1,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"}, 
+  {"customer_id":2,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
+  {"customer_id":3,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
+  {"customer_id":4,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
+  {"customer_id":5,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
+  {"customer_id":6,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},];
+    function formFill() {
+        updateOwner(s_data);
+    };
+</script> }}
 
+<script>
+  function formFill() {
+        updateOwner(data);
+    };
+</script>
+
+<br />
 
 <!-- /views/index.hbs -->
-<h2>Adding Data using an HTML form</h2>
-<p>To add a new person, please enter their information below nad click `Submit`!</p>
-<form id='add-customer-form' method='POST' action='/add-customer-form'>
-  <label for='input-fname'>First Name: </label>
-  <input type='text' name='input-fname' id='input-fname' />
+<div class="section">
+  <h3 class="h3-create">
+    Create Customer
+  </h3>
+  <form id="add-customer-form" method="POST" action="/add-customer-form">
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-fname">
+            First Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-fname" id="input-fname" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-lname'>Last Name: </label>
-  <input type='text' name='input-lname' id='input-lname' />
+      <tr>
+        <td>
+          <label for="input-lname">
+            Last Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-lname" id="input-lname" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-phone'>Phone Number: </label>
-  <input
-    type='tel'
-    name='input-phone'
-    id='input-phone'
-  />
+      <tr>
+        <td>
+          <label for="input-phone">
+            Phone Number:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-phone" id="input-phone" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-email'>Email: </label>
-  <input type='text' name='input-email' id='input-email' />
+      <tr>
+        <td>
+          <label for="input-email">
+            Email:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-email" id="input-email" />
+        </td>
+      </tr>
 
-  <label for='input-photo'>Photo: </label>
-  <input type='text' name='input-photo' id='input-photo' />
+      <tr>
+        <td>
+          <label for="input-photo">
+            Photo:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-photo" id="input-photo" />
+        </td>
+      </tr>
+    </table>
 
-  <input type='submit' />
-</form>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>
+
+<div class="section">
+  <h3 class="h3-create">
+    Update Customer
+  </h3>
+  <form id="update-customer-form-ajax">
+    <label for="input-fullname">
+      Select a Customer to Update:
+    </label>
+    <select
+      name="input-fullname"
+      id="update-name"
+      onChange="formFill()"
+      required
+    >
+      <option value="test">
+        Select a Person
+      </option>
+      {{#each data}}
+        <option value="{{this.id}}">
+          {{this.fname}} {{this.lname}}
+        </option>
+      {{/each}}
+    </select>
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="update-fname">
+            First Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-fname" id="update-fname" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-lname">
+            Last Name:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-lname" id="update-lname" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-phone">
+            Phone Number:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-phone" id="update-phone" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-email">
+            Email:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-email" id="update-email" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="update-photo">
+            Photo:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="update-photo" id="update-photo" />
+        </td>
+      </tr>
+    </table>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>
+<script src="/js/delete.js"></script>
+<script src="/js/update.js"></script>

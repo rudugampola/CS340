@@ -1,70 +1,193 @@
 {{! Create a table }}
-<table id='guides-table'>
-
+<table id="guides-table" class="main-table">
+  <h2>
+    Guides
+  </h2>
   {{! Header section }}
   <thead>
-
     {{! For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders }}
     <tr>
-      <th>Id</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Title</th>
-      <th>Photo</th>
-      <th>Delete</th>
+      <th>
+        Id
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Title
+      </th>
+      <th>
+        Photo
+      </th>
+      <th>
+        Delete
+      </th>
     </tr>
   </thead>
 
   {{! Body section }}
   <tbody>
-
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
       <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.fname}}</td>
-        <td>{{this.lname}}</td>
-        <td>{{this.phone}}</td>
-        <td>{{this.email}}</td>
-        <td>{{this.title}}</td>
-        <td>{{this.photo}}</td>
-        <td><button onclick="deleteGuide({{this.guide_id}})">Delete</button></td>
+        <td>
+          {{this.id}}
+        </td>
+        <td>
+          {{this.fname}}
+        </td>
+        <td>
+          {{this.lname}}
+        </td>
+        <td>
+          {{this.phone}}
+        </td>
+        <td>
+          {{this.email}}
+        </td>
+        <td>
+          {{this.title}}
+        </td>
+        <td>
+          {{this.photo}}
+        </td>
+        <td>
+          <button onclick="deleteGuide({{this.guide_id}})">
+            Delete
+          </button>
+        </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 
 <script src="/js/delete.js"></script>
+<br />
 
 <!-- /views/index.hbs -->
-<h2>Adding Data using an HTML form</h2>
-<p>To add a new person, please enter their information below nad click `Submit`!</p>
-<form id='add-guide-form' method='POST' action='/add-guide-form'>
+<div class="section">
+  <h3 class="h3-create">
+    Create Guide
+  </h3>
+  <form id="add-guide-form" method="POST" action="/add-guide-form">
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-guide-fname">
+            Guide First Name:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-guide-fname"
+            id="input-guide-fname"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-guide-fname'>Guide First Name: </label>
-  <input type='text' name='input-guide-fname' id='input-guide-fname' />
+      <tr>
+        <td>
+          <label for="input-guide-lname">
+            Guide Last Name:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-guide-lname"
+            id="input-guide-lname"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-guide-lname'>Guide Last Name: </label>
-  <input type='text' name='input-guide-lname' id='input-guide-lname' />
+      <tr>
+        <td>
+          <label for="input-guide-phone">
+            Guide Phone:
+          </label>
+        </td>
+        <td>
+          <input
+            type="tel"
+            name="input-guide-phone"
+            id="input-guide-phone"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-guide-phone'>Guide Phone: </label>
-  <input
-    type='tel'
-    name='input-guide-phone'
-    id='input-guide-phone'
-  />
+      <tr>
+        <td>
+          <label for="input-guide-email">
+            Guide Email:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-guide-email"
+            id="input-guide-email"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-guide-email'>Guide Email: </label>
-  <input type='text' name='input-guide-email' id='input-guide-email' />
+      <tr>
+        <td>
+          <label for="input-title">
+            Guide Title:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-title" id="input-title" />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-title'>Guide Title: </label>
-  <input type='text' name='input-title' id='input-title' />
-
-  <label for='input-photo'>Guide Photo: </label>
-  <input type='text' name='input-photo' id='input-photo' />
-
-  <input type='submit' />
-</form>
+      <tr>
+        <td>
+          <label for="input-photo">
+            Guide Photo:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-photo" id="input-photo" />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+    </table>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>

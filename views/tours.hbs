@@ -1,76 +1,211 @@
 {{! Create a table }}
-<table id='tours-table'>
-
+<table id="tours-table" class="main-table">
+  <h2>
+    Tours
+  </h2>
   {{! Header section }}
   <thead>
-
     {{! For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders }}
     <tr>
-      <th>Id</th>
-      <th>Tour Name</th>
-      <th>Difficulty</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Image</th>
-      <th>Date</th>
-      <th>Delete</th>
+      <th>
+        Id
+      </th>
+      <th>
+        Tour Name
+      </th>
+      <th>
+        Difficulty
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Location
+      </th>
+      <th>
+        Image
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Delete
+      </th>
     </tr>
   </thead>
 
   {{! Body section }}
   <tbody>
-
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
       <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.name}}</td>
-        <td>{{this.difficulty}}</td>
-        <td>{{this.price}}</td>
-        <td>{{this.description}}</td>
-        <td>{{this.location}}</td>
-        <td>{{this.cover_image}}</td>
-        <td>{{this.date}}</td>
-        <td><button onclick="deleteTour({{this.tour_id}})">Delete</button></td>
+        <td>
+          {{this.id}}
+        </td>
+        <td>
+          {{this.name}}
+        </td>
+        <td>
+          {{this.difficulty}}
+        </td>
+        <td>
+          {{this.price}}
+        </td>
+        <td>
+          {{this.description}}
+        </td>
+        <td>
+          {{this.location}}
+        </td>
+        <td>
+          {{this.cover_image}}
+        </td>
+        <td>
+          {{this.date}}
+        </td>
+        <td>
+          <button onclick="deleteTour({{this.tour_id}})">
+            Delete
+          </button>
+        </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 
 <script src="/js/delete.js"></script>
+<br />
 
 <!-- /views/index.hbs -->
-<h2>Adding Data using an HTML form</h2>
-<p>To add a new person, please enter their information below nad click `Submit`!</p>
-<form id='add-tours-form' method='POST' action='/add-tour-form'>
-  <label for='input-tour-name'>Tour Name: </label>
-  <input type='text' name='input-tour-name' id='input-tour-name' />
+<div class="section">
+  <h3 class="h3-create">
+    Create Tour
+  </h3>
+  <form id="add-tours-form" method="POST" action="/add-tour-form">
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-tour-name">
+            Tour Name:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-tour-name"
+            id="input-tour-name"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-difficulty'>Tour Difficulty: </label>
-  <input type='text' name='input-difficulty' id='input-difficulty' />
+      <tr>
+        <td>
+          <label for="input-difficulty">
+            Tour Difficulty:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-difficulty"
+            id="input-difficulty"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-price'>Price: </label>
-  <input
-    type='number'
-    min='0.01'
-    step='0.01'
-    name='input-price'
-    id='input-price'
-  />
+      <tr>
+        <td>
+          <label for="input-price">
+            Price:
+          </label>
+        </td>
+        <td>
+          <input type="number" name="input-price" id="input-price" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-description'>Tour Description: </label>
-  <input type='text' name='input-description' id='input-description' />
+      <tr>
+        <td>
+          <label for="input-description">
+            Tour Description:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-description"
+            id="input-description"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-cover'>Tour Cover Image: </label>
-  <input type='text' name='input-cover' id='input-cover' />
+      <tr>
+        <td>
+          <label for="input-cover">
+            Tour Cover Image:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-cover" id="input-cover" />
+        </td>
+      </tr>
 
-  <label for='input-location'>Tour Location: </label>
-  <input type='text' name='input-location' id='input-location' />
+      <tr>
+        <td>
+          <label for="input-location">
+            Tour Location:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-location"
+            id="input-location"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-date'>Tour Date: </label>
-  <input type='date' name='input-date' id='input-date' />
+      <tr>
+        <td>
+          <label for="input-date">
+            Tour Date:
+          </label>
+        </td>
+        <td>
+          <input type="date" name="input-date" id="input-date" date />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+    </table>
 
-  <input type='submit' />
-</form>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>

@@ -1,70 +1,181 @@
 {{! Create a table }}
-<table id='reviews-table'>
-
+<table id="reviews-table" class="main-table">
+  <h2>
+    Reviews
+  </h2>
   {{! Header section }}
   <thead>
-
     {{! For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders }}
     <tr>
-      <th>Id</th>
-      <th>Date</th>
-      <th>Review</th>
-      <th>Customer Id</th>
-      <th>Tour Id</th>
-      <th>Rating</th>
+      <th>
+        Id
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Review
+      </th>
+      <th>
+        Customer Id
+      </th>
+      <th>
+        Tour Id
+      </th>
+      <th>
+        Rating
+      </th>
+      <th>
+        Delete
+      </th>
     </tr>
   </thead>
 
   {{! Body section }}
   <tbody>
-
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
       <tr>
-        <td>{{this.id}}</td>
-        <td>{{this.date}}</td>
-        <td>{{this.review}}</td>
-        <td>{{this.customer_id}}</td>
-        <td>{{this.tour_id}}</td>
-        <td>{{this.rating}}</td>
-        <td><button onclick="deleteReview({{this.id}})">Delete</button></td>
+        <td>
+          {{this.id}}
+        </td>
+        <td>
+          {{this.date}}
+        </td>
+        <td>
+          {{this.review}}
+        </td>
+        <td>
+          {{this.customer_id}}
+        </td>
+        <td>
+          {{this.tour_id}}
+        </td>
+        <td>
+          {{this.rating}}
+        </td>
+        <td>
+          <button onclick="deleteReview({{this.id}})">
+            Delete
+          </button>
+        </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 
 <script src="/js/delete.js"></script>
+<br />
 
 <!-- /views/index.hbs -->
-<h2>Adding Data using an HTML form</h2>
-<p>To add a new person, please enter their information below nad click `Submit`!</p>
-<form id='add-review-form' method='POST' action='/add-review-form'>
+<div class="section">
+  <h3 class="h3-create">
+    Create Review
+  </h3>
+  <form id="add-review-form" method="POST" action="/add-review-form">
+    <table class="sub-table">
+      <tr>
+        <td>
+          <label for="input-date">
+            Review Date:
+          </label>
+        </td>
+        <td>
+          <input type="date" name="input-date" id="input-date" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-date'>Review Date: </label>
-  <input type='date' name='input-date' id='input-date' />
+      <tr>
+        <td>
+          <label for="input-review">
+            Review:
+          </label>
+        </td>
+        <td>
+          <input type="text" name="input-review" id="input-review" required />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-  <label for='input-review'>Review: </label>
-  <input type='text' name='input-review' id='input-review' />
+      <tr>
+        <td>
+          <label for="input-review-customer">
+            Customer:
+          </label>
+        </td>
+        <td>
+          <select
+            name="input-review-customer"
+            id="input-review-customer-ajax"
+            required
+          >
+            <option value="">
+              Select a Customer
+            </option>
+            {{#each results.customers}}
+              <option value="{{this.id}}">
+                {{this.lname}}, {{this.fname}}
+              </option>
+            {{/each}}
+          </select>
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-    <label for='input-review-customer'>Customer: </label>
-    <select name="input-review-customer" id="input-review-customer-ajax">
-        <option value="">Select a Customer</option>
-        {{#each results.customers}}
-        <option value="{{this.id}}">{{this.lname}}, {{this.fname}} </option>
-        {{/each}}
-    </select>
+      <tr>
+        <td>
+          <label for="input-review-tour">
+            Tour:
+          </label>
+        </td>
+        <td>
+          <select name="input-review-tour" id="input-review-tour-ajax" required>
+            <option value="">
+              Select a Tour
+            </option>
+            {{#each results.tours}}
+              <option value="{{this.id}}">
+                {{this.name}}
+              </option>
+            {{/each}}
+          </select>
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
 
-    <label for='input-review-tour'>Tour: </label>
-    <select name="input-review-tour" id="input-review-tour-ajax">
-        <option value="">Select a Tour</option>
-        {{#each results.tours}}
-        <option value="{{this.id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
+      <tr>
+        <td>
+          <label for="input-review-rating">
+            Rating:
+          </label>
+        </td>
+        <td>
+          <input
+            type="text"
+            name="input-review-rating"
+            id="input-review-rating"
+            required
+          />
+        </td>
+        <td>
+          *Required
+        </td>
+      </tr>
+    </table>
 
-    <label for='input-review-rating'>Rating: </label>
-    <input type='text' name='input-review-rating' id='input-review-rating' />
-
-  <input type='submit' />
-</form>
+    <div class="form-btns">
+      <input type="submit" />
+      <input type="reset" />
+    </div>
+  </form>
+</div>

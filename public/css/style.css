@@ -7,7 +7,8 @@ html {
 
 body {
     /*rgb(198, 236, 248)  */
-    background: linear-gradient(to left bottom, rgb(198, 236, 248), rgb(255, 255, 255));
+    /* background: linear-gradient(to left bottom, rgb(198, 236, 248), rgb(255, 255, 255)); */
+    background: #f08725;
     color: #184b5a;
     margin: 1%;
     font-size: 16px;
@@ -29,11 +30,14 @@ td {
     border: 1px solid gray;
     height: 20px;
     width: 160px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .main-table tr:nth-child(odd) td {
+    /* f08725 */
     background-color: rgb(247, 247, 240);
+
+
 }
 
 .main-table tr:nth-child(even) td {
@@ -58,8 +62,10 @@ h3 {
 }
 
 .title img {
-    height: 50px;
-    margin-bottom: 10px;
+    /* height: 50px;
+    margin-bottom: 10px; */
+    height: 200px;
+    margin-right: 10px;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

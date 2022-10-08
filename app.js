@@ -9,6 +9,9 @@ PORT = 8000; // Set a port number at the top so it's easy to change in the futur
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Use Morgan for Loggin
+const morgan = require('morgan');
+
 // SQL Database
 var db = require('./db-connector');
 
@@ -18,6 +21,9 @@ app.engine('.hbs', engine({ extname: '.hbs' })); // Create an instance of the ha
 app.set('view engine', '.hbs'); // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 app.use(express.static(__dirname + '/public')); // Tell express to serve static files from the public folder
+
+// Development Logging
+app.use(morgan('dev')); // morgan will log requests
 
 /*
     ROUTES
@@ -89,6 +95,60 @@ app.delete('/delete-customer-ajax/', function (req, res, next) {
           }
         }
       );
+    }
+  });
+});
+
+app.put('/put-customer-ajax', function (req, res, next) {
+  let data = req.body;
+  let customerID = parseInt(data.id);
+  // console.log(customerID);
+
+  let updateCustomers = `UPDATE Customers SET fname = ?, lname = ?, phone = ?, email = ?, photo = ? WHERE id = ?`;
+
+  // Run query and update the database then refresh the page
+  db.pool.query(
+    updateCustomers,
+    [
+      data['fname'],
+      data['lname'],
+      data['phone'],
+      data['email'],
+      data['photo'],
+      customerID,
+    ],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      } else {
+        // set status and refresh the page
+        console.log('Updated');
+        res.redirect(204, '/customers');
+      }
+    }
+  );
+});
+
+app.get('/customers/:id', function (req, res) {
+  let customerID = req.params.id;
+  let customers = `SELECT * FROM Customers WHERE id = ${customerID};`;
+  let trip_logs = `SELECT * FROM Trip_Logs WHERE customer_id = ${customerID};`;
+
+  db.pool.query(customers, function (error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    } else {
+      let customer = rows[0];
+      db.pool.query(trip_logs, function (error, rows, fields) {
+        if (error) {
+          console.log(error);
+          res.sendStatus(400);
+        } else {
+          res.render('customer', { customer: customer, trip_logs: rows });
+        }
+      });
     }
   });
 });
@@ -216,16 +276,6 @@ app.delete('/delete-guide-ajax/', function (req, res, next) {
   });
 });
 
-// app.get('/triplogs', function (req, res) {
-//   let query1 = 'SELECT * FROM Trip_Logs;'; // Define our query
-
-//   db.pool.query(query1, function (error, rows, fields) {
-//     // Execute the query
-
-//     res.render('trip', { data: rows }); // Render the index.hbs file, and also send the renderer
-//   }); // Note the call to render() and not send(). Using render() ensures the templating engine
-// }); // will process this file, before sending the finished HTML to the client.
-
 app.get('/triplogs', function (req, res) {
   let customers = 'SELECT * FROM Customers;'; // Define our query
   let guides = 'SELECT * FROM Guides;';
@@ -239,7 +289,7 @@ app.get('/triplogs', function (req, res) {
     db.pool.query(customers, (error, rows, fields) => {
       // Execute the query
       let customers = rows;
-      console.log(customers);
+
       db.pool.query(guides, (error, rows, fields) => {
         // Save the planets
         let guides = rows;
