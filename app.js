@@ -44,8 +44,6 @@ app.get('/customers', function (req, res) {
   }); // Note the call to render() and not send(). Using render() ensures the templating engine
 }); // will process this file, before sending the finished HTML to the client.
 
-// app.js
-
 app.post('/add-customer-form', function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
@@ -123,8 +121,7 @@ app.put('/put-customer-ajax', function (req, res, next) {
         res.sendStatus(400);
       } else {
         // set status and refresh the page
-        console.log('Updated');
-        res.redirect(204, '/customers');
+        res.send(rows);
       }
     }
   );

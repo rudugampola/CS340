@@ -36,7 +36,7 @@
   <tbody>
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
-      <tr>
+      <tr data-value={{this.id}}>
         <td>
           {{this.id}}
         </td>
@@ -64,24 +64,6 @@
     {{/each}}
   </tbody>
 </table>
-
-{{! <script type="text/javascript">
-  var s_data = [{"customer_id":1,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"}, 
-  {"customer_id":2,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
-  {"customer_id":3,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
-  {"customer_id":4,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
-  {"customer_id":5,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},
-  {"customer_id":6,"customer_last_name":"Smith","customer_first_name":"Matt","customer_phone_number":"832-123-4123","customer_email":null,"customer_photo":"Test Photo"},];
-    function formFill() {
-        updateOwner(s_data);
-    };
-</script> }}
-
-<script>
-  function formFill() {
-        updateOwner(data);
-    };
-</script>
 
 <br />
 
@@ -175,7 +157,7 @@
     <select
       name="input-fullname"
       id="update-name"
-      onChange="formFill()"
+      onChange="formFill(this)"
       required
     >
       <option value="test">
@@ -260,3 +242,11 @@
 </div>
 <script src="/js/delete.js"></script>
 <script src="/js/update.js"></script>
+
+<script>
+  function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCustomer(id)
+    };
+</script>

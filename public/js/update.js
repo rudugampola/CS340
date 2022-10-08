@@ -10,7 +10,6 @@ updateCustomerForm.addEventListener('submit', function (e) {
   // Get the data from the form
   let inputCustomerID = document.getElementById('update-name');
   let inputCustomerFName = document.getElementById('update-fname');
-  console.log(inputCustomerFName);
   let inputCustomerLName = document.getElementById('update-lname');
   let inputCustomerEmail = document.getElementById('update-email');
   let inputCustomerPhone = document.getElementById('update-phone');
@@ -23,12 +22,12 @@ updateCustomerForm.addEventListener('submit', function (e) {
   let customerPhoneValue = inputCustomerPhone.value;
   let customerPhotoValue = inputCustomerPhoto.value;
 
-  console.log(customerIDValue);
-  console.log(customerFNameValue);
-  console.log(customerLNameValue);
-  console.log(customerEmailValue);
-  console.log(customerPhoneValue);
-  console.log(customerPhotoValue);
+  //   console.log(customerIDValue);
+  //   console.log(customerFNameValue);
+  //   console.log(customerLNameValue);
+  //   console.log(customerEmailValue);
+  //   console.log(customerPhoneValue);
+  //   console.log(customerPhotoValue);
 
   // Put our data we want to send in a javascript object
   let data = {
@@ -62,7 +61,7 @@ updateCustomerForm.addEventListener('submit', function (e) {
 function updateRow(data, personID) {
   let parsedData = JSON.parse(data);
 
-  let table = document.getElementById('customer-table');
+  let table = document.getElementById('customers-table');
 
   for (let i = 0, row; (row = table.rows[i]); i++) {
     //iterate through rows
@@ -80,17 +79,26 @@ function updateRow(data, personID) {
   }
 }
 
-function updateOwner(data) {
-  let select = document.getElementById('update-name');
-  let customerID = select.options[select.selectedIndex].value;
-  for (let obj in data) {
-    if (data[obj].id == customerID) {
-      document.getElementById('update-fname').value = data[obj].fname;
-      document.getElementById('update-lname').value = data[obj].lname;
-      document.getElementById('update-phone').value = data[obj].phone;
-      document.getElementById('update-email').value = data[obj].email;
-      document.getElementById('update-photo').value = data[obj].photo;
-    }
-  }
+function updateCustomer(id) {
+  document.getElementById('update-fname').value = document
+    .querySelector(`tr[data-value="${id}"]`)
+    .querySelectorAll('td')[1]
+    .innerHTML.trim();
+  document.getElementById('update-lname').value = document
+    .querySelector(`tr[data-value="${id}"]`)
+    .querySelectorAll('td')[2]
+    .innerHTML.trim();
+  document.getElementById('update-phone').value = document
+    .querySelector(`tr[data-value="${id}"]`)
+    .querySelectorAll('td')[3]
+    .innerHTML.trim();
+  document.getElementById('update-email').value = document
+    .querySelector(`tr[data-value="${id}"]`)
+    .querySelectorAll('td')[4]
+    .innerHTML.trim();
+  document.getElementById('update-photo').value = document
+    .querySelector(`tr[data-value="${id}"]`)
+    .querySelectorAll('td')[5]
+    .innerHTML.trim();
   return;
 }
