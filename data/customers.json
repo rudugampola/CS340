@@ -1,0 +1,50 @@
+[
+    {
+        "id": "1",
+        "fname": "Jonas",
+        "lname": "Schmedtmann",
+        "phone": "225-989-5588",
+        "email": "jonas@example.com",
+        "photo": "user-1.jpg"
+    },
+    {
+        "id": "2",
+        "fname": "Lourdes",
+        "lname": "Browning",
+        "phone": "215-332-6699",
+        "email": "loulou@example.com",
+        "photo": "user-2.jpg"
+    },
+    {
+        "id": "3",
+        "fname": "Sophie",
+        "lname": "Louise Hart",
+        "phone": "336-889-4455",
+        "email": "sophie@example.com",
+        "photo": "user-3.jpg"
+    },
+    {
+        "id": "4",
+        "fname": "Ayla",
+        "lname": "Cornell",
+        "phone": "336-889-4455",
+        "email": "ayls@example.com",
+        "photo": "user-4.jpg"
+    },
+    {
+        "id": "5",
+        "fname": "Leo",
+        "lname": "Gillespie",
+        "phone": "336-889-4455",
+        "email": "leo@example.com",
+        "photo": "user-5.jpg"
+    },
+    {
+        "id": "6",
+        "fname": "Jennifer",
+        "lname": "Hardy",
+        "phone": "336-889-4455",
+        "email": "jennifer@example.com",
+        "photo": "user-6.jpg"
+    }
+]

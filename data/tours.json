@@ -1,0 +1,72 @@
+[
+    {
+        "id": "1",
+        "name": "Dennard",
+        "difficulty": "Extreme",
+        "price": 387.31,
+        "description": "Sint nulla ea culpa ad culpa id est deserunt. Non ipsum labore nulla eiusmod mollit esse consectetur.",
+        "location": "Wells",
+        "cover_image": "cover.jpg",
+        "date": "2004-06-27"
+    },
+    {
+        "id": "2",
+        "name": "Guilford",
+        "difficulty": "Easy",
+        "price": 655.34,
+        "description": "Aliquip qui et tempor veniam mollit qui incididunt minim voluptate excepteur cillum labore fugiat mollit. Exercitation adipisicing laborum veniam labore velit.",
+        "location": "Henrietta",
+        "cover_image": "cover.jpg",
+        "date": "1997-06-19"
+    },
+    {
+        "id": "3",
+        "name": "Unionville",
+        "difficulty": "Medium",
+        "price": 434.36,
+        "description": "Adipisicing incididunt elit irure nostrud. Adipisicing sunt do magna nostrud esse excepteur commodo pariatur excepteur consectetur.",
+        "location": "Sterling",
+        "cover_image": "cover.jpg",
+        "date": "2010-10-06"
+    },
+    {
+        "id": "4",
+        "name": "Thatcher",
+        "difficulty": "Hard",
+        "price": 721.15,
+        "description": "In veniam anim nostrud excepteur. Proident sint cupidatat mollit incididunt magna et aliqua magna et dolore.",
+        "location": "Charco",
+        "cover_image": "cover.jpg",
+        "date": "2000-03-02"
+    },
+    {
+        "id": "5",
+        "name": "Wollochet",
+        "difficulty": "Extreme",
+        "price": 151.44,
+        "description": "Ad adipisicing tempor esse incididunt do deserunt occaecat qui aliquip nostrud in aliqua. Non ea quis cupidatat amet cillum commodo veniam do.",
+        "location": "Clayville",
+        "cover_image": "cover.jpg",
+        "date": "2021-05-11"
+    },
+    {
+        "id": "6",
+        "name": "Mammoth",
+        "difficulty": "Easy",
+        "price": 907.39,
+        "description": "Proident exercitation ipsum consectetur amet sunt. Adipisicing consectetur officia minim ex quis et.",
+        "location": "Edmund",
+        "cover_image": "cover.jpg",
+        "date": "2016-05-22"
+    },
+    {
+        "id": "7",
+        "name": "Cornucopia",
+        "difficulty": "Extreme",
+        "price": 974.53,
+        "description": "Occaecat aute officia deserunt exercitation ad et dolor nulla pariatur enim. Pariatur et nulla id minim dolor Lorem elit in esse.",
+        "location": "Eggertsville",
+        "cover_image": "cover.jpg",
+        "date": "1989-12-29"
+    }
+]

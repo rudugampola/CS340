@@ -127,29 +127,6 @@ app.put('/put-customer-ajax', function (req, res, next) {
   );
 });
 
-app.get('/customers/:id', function (req, res) {
-  let customerID = req.params.id;
-  let customers = `SELECT * FROM Customers WHERE id = ${customerID};`;
-  let trip_logs = `SELECT * FROM Trip_Logs WHERE customer_id = ${customerID};`;
-
-  db.pool.query(customers, function (error, rows, fields) {
-    if (error) {
-      console.log(error);
-      res.sendStatus(400);
-    } else {
-      let customer = rows[0];
-      db.pool.query(trip_logs, function (error, rows, fields) {
-        if (error) {
-          console.log(error);
-          res.sendStatus(400);
-        } else {
-          res.render('customer', { customer: customer, trip_logs: rows });
-        }
-      });
-    }
-  });
-});
-
 app.get('/tours', function (req, res) {
   let query1 = 'SELECT * FROM Tours;'; // Define our query
 
