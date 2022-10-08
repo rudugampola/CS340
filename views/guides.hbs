@@ -207,7 +207,7 @@
             </option>
             {{#each data}}
               <option value="{{this.id}}">
-                {{this.fname}} {{this.lname}}
+                {{this.lname}}, {{this.fname}}
               </option>
             {{/each}}
           </select>
@@ -295,6 +295,8 @@
     </div>
   </form>
 </div>
+
+<br />
 
 <script src="/js/delete.js"></script>
 <script src="/js/updateGuide.js"></script>
