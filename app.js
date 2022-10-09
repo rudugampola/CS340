@@ -1,15 +1,13 @@
-/*
-    SETUP
-*/
 // Express
 var express = require('express'); // We are using the express library for the web server
 var app = express(); // We need to instantiate an express object to interact with the server in our code
 PORT = 8000; // Set a port number at the top so it's easy to change in the future
+var os = require('os'); // We are using the os library to get information about the server
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Use Morgan for Loggin
+// Use Morgan for Logging
 const morgan = require('morgan');
 
 // SQL Database
@@ -23,35 +21,29 @@ app.set('view engine', '.hbs'); // Tell express to use the handlebars engine whe
 app.use(express.static(__dirname + '/public')); // Tell express to serve static files from the public folder
 
 // Development Logging
-app.use(morgan('dev')); // morgan will log requests
+app.use(morgan('dev')); // Morgan will log requests
 
-/*
-    ROUTES
-*/
-// app.js
-
+// HOMEPAGE
 app.get('/', function (req, res) {
-  res.render('index'); // Render the index.hbs file, and also send the renderer
-}); // will process this file, before sending the finished HTML to the client.
+  res.render('index');
+});
 
+// CUSTOMERS
 app.get('/customers', function (req, res) {
-  let customers = 'SELECT * FROM Customers;'; // Define our query
-
+  let customers = 'SELECT * FROM Customers;';
   db.pool.query(customers, function (error, rows, fields) {
-    // Execute the query
+    res.render('customers', { data: rows });
+  });
+});
 
-    res.render('customers', { data: rows }); // Render the index.hbs file, and also send the renderer
-  }); // Note the call to render() and not send(). Using render() ensures the templating engine
-}); // will process this file, before sending the finished HTML to the client.
-
+// CUSTOMER CREATE
 app.post('/add-customer-form', function (req, res) {
-  // Capture the incoming data and parse it back to a JS object
   let data = req.body;
 
   // Create the query and run it on the database
-  query1 = `INSERT INTO Customers (fname, lname, phone, email, photo) VALUES ('${data['input-fname']}', '${data['input-lname']}', '${data['input-phone']}', '${data['input-email']}', '${data['input-photo']}')`;
+  query1 = `INSERT INTO Customers (fname, lname, phone, email, photo) VALUES ('${data['input-fname']}', 
+  '${data['input-lname']}', '${data['input-phone']}', '${data['input-email']}', '${data['input-photo']}')`;
   db.pool.query(query1, function (error, rows, fields) {
-    // Check to see if there was an error
     if (error) {
       // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
@@ -66,21 +58,18 @@ app.post('/add-customer-form', function (req, res) {
   });
 });
 
+// CUSTOMER DELETE
 app.delete('/delete-customer-ajax/', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
   let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE customer_id = ?`;
-  //   let deleteReviews = `DELETE FROM Reviews WHERE review_id = ?`;
   let deleteCustomers = `DELETE FROM Customers WHERE id = ?`;
 
-  // Run the 1st query
   db.pool.query(deleteTrip_Logs, [customerID], function (error, rows, fields) {
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
     } else {
-      // Run the second query
       db.pool.query(
         deleteCustomers,
         [customerID],
@@ -97,14 +86,13 @@ app.delete('/delete-customer-ajax/', function (req, res, next) {
   });
 });
 
+// CUSTOMER UPDATE
 app.put('/put-customer-ajax', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
-  // console.log(customerID);
 
   let updateCustomers = `UPDATE Customers SET fname = ?, lname = ?, phone = ?, email = ?, photo = ? WHERE id = ?`;
 
-  // Run query and update the database then refresh the page
   db.pool.query(
     updateCustomers,
     [
@@ -120,67 +108,53 @@ app.put('/put-customer-ajax', function (req, res, next) {
         console.log(error);
         res.sendStatus(400);
       } else {
-        // set status and refresh the page
         res.send(rows);
       }
     }
   );
 });
 
+// TOURS
 app.get('/tours', function (req, res) {
-  let query1 = 'SELECT * FROM Tours;'; // Define our query
-
+  let query1 = 'SELECT * FROM Tours;';
   db.pool.query(query1, function (error, rows, fields) {
-    // Execute the query
+    res.render('tours', { data: rows });
+  });
+});
 
-    res.render('tours', { data: rows }); // Render the index.hbs file, and also send the renderer
-  }); // Note the call to render() and not send(). Using render() ensures the templating engine
-}); // will process this file, before sending the finished HTML to the client.
-
+// TOUR CREATE
 app.post('/add-tour-form', function (req, res) {
-  // Capture the incoming data and parse it back to a JS object
   let data = req.body;
-
-  // Capture date and save as yyyy-mm-dd
   let date = new Date(data['input-date']);
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
   let dateStr = `${year}-${month}-${day}`;
 
-  // Create the query and run it on the database
   query1 = `INSERT INTO Tours (name, difficulty, price, description, cover_image, location, date) VALUES ('${data['input-tour-name']}', 
   '${data['input-difficulty']}', '${data['input-price']}' ,'${data['input-description']}', '${data['input-cover']}', '${data['input-location']}', '${dateStr}')`;
   db.pool.query(query1, function (error, rows, fields) {
-    // Check to see if there was an error
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
-    }
-
-    // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-    // presents it on the screen
-    else {
+    } else {
       res.redirect('/tours');
     }
   });
 });
 
+// TOUR DELETE
 app.delete('/delete-tour-ajax/', function (req, res, next) {
   let data = req.body;
   let tourID = parseInt(data.id);
   let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE id = ?`;
   let deleteTours = `DELETE FROM Tours WHERE id = ?`;
 
-  // Run the 1st query
   db.pool.query(deleteTrip_Logs, [tourID], function (error, rows, fields) {
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
     } else {
-      // Run the second query
       db.pool.query(deleteTours, [tourID], function (error, rows, fields) {
         if (error) {
           console.log(error);
@@ -193,14 +167,12 @@ app.delete('/delete-tour-ajax/', function (req, res, next) {
   });
 });
 
+// TOUR UPDATE
 app.put('/put-tour-ajax', function (req, res, next) {
   let data = req.body;
   let tourID = parseInt(data.id);
-  // console.log(customerID);
 
   let updateTours = `UPDATE Tours SET name = ?, difficulty = ?, price = ?, description = ?, cover_image = ?, location = ?, date = ? WHERE id = ?`;
-
-  // Run query and update the database then refresh the page
   db.pool.query(
     updateTours,
     [
@@ -218,60 +190,48 @@ app.put('/put-tour-ajax', function (req, res, next) {
         console.log(error);
         res.sendStatus(400);
       } else {
-        // set status and refresh the page
         res.send(rows);
       }
     }
   );
 });
 
+// GUIDES
 app.get('/guides', function (req, res) {
-  let query1 = 'SELECT * FROM Guides;'; // Define our query
-
+  let query1 = 'SELECT * FROM Guides;';
   db.pool.query(query1, function (error, rows, fields) {
-    // Execute the query
+    res.render('guides', { data: rows });
+  });
+});
 
-    res.render('guides', { data: rows }); // Render the index.hbs file, and also send the renderer
-  }); // Note the call to render() and not send(). Using render() ensures the templating engine
-}); // will process this file, before sending the finished HTML to the client.
-
+// GUIDE CREATE
 app.post('/add-guide-form', function (req, res) {
-  // Capture the incoming data and parse it back to a JS object
   let data = req.body;
 
-  // Create the query and run it on the database
   query1 = `INSERT INTO Guides (fname, lname, phone, email, title, photo) VALUES ('${data['input-guide-fname']}','${data['input-guide-lname']}', 
     '${data['input-guide-phone']}', '${data['input-guide-email']}' ,'${data['input-title']}', '${data['input-photo']}')`;
   db.pool.query(query1, function (error, rows, fields) {
-    // Check to see if there was an error
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
-    }
-
-    // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-    // presents it on the screen
-    else {
+    } else {
       res.redirect('/guides');
     }
   });
 });
 
+// GUIDE DELETE
 app.delete('/delete-guide-ajax/', function (req, res, next) {
   let data = req.body;
   let guideID = parseInt(data.id);
   let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE guide_id = ?`;
   let deleteGuides = `DELETE FROM Guides WHERE id = ?`;
 
-  // Run the 1st query
   db.pool.query(deleteTrip_Logs, [guideID], function (error, rows, fields) {
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
     } else {
-      // Run the second query
       db.pool.query(deleteGuides, [guideID], function (error, rows, fields) {
         if (error) {
           console.log(error);
@@ -284,14 +244,13 @@ app.delete('/delete-guide-ajax/', function (req, res, next) {
   });
 });
 
+// GUIDE UPDATE
 app.put('/put-guide-ajax', function (req, res, next) {
   let data = req.body;
   let guideID = parseInt(data.id);
-  // console.log(customerID);
 
   let updateGuides = `UPDATE Guides SET fname = ?, lname = ?, phone = ?, email = ?, title = ?, photo = ? WHERE id = ?`;
 
-  // Run query and update the database then refresh the page
   db.pool.query(
     updateGuides,
     [
@@ -308,82 +267,67 @@ app.put('/put-guide-ajax', function (req, res, next) {
         console.log(error);
         res.sendStatus(400);
       } else {
-        // set status and refresh the page
         res.send(rows);
       }
     }
   );
 });
 
+// TRIP LOGS
 app.get('/triplogs', function (req, res) {
-  let customers = 'SELECT * FROM Customers;'; // Define our query
+  let customers = 'SELECT * FROM Customers;';
   let guides = 'SELECT * FROM Guides;';
   let tours = 'SELECT * FROM Tours;';
-  let logs = 'SELECT * FROM Trip_Logs;'; // Define our query
+  let logs = 'SELECT * FROM Trip_Logs;';
 
   db.pool.query(logs, function (error, rows, fields) {
-    // Execute the query
     let logs = rows;
 
     db.pool.query(customers, (error, rows, fields) => {
-      // Execute the query
       let customers = rows;
 
       db.pool.query(guides, (error, rows, fields) => {
-        // Save the planets
         let guides = rows;
 
         db.pool.query(tours, (error, rows, fields) => {
-          // Save the planets
           let tours = rows;
 
           res.render('triplogs', {
             data: logs,
             results: { customers, guides, tours },
-          }); // Render the index.hbs file, and also send the renderer
+          });
         });
       });
-      // Render the index.hbs file, and also send the renderer
-    }); // Note the call to render() and not send(). Using render() ensures the templating engine
-  }); // will process this file, before sending the finished HTML to the client.
+    });
+  });
 });
 
+// TRIP LOG CREATE
 app.post('/add-log-form', function (req, res) {
-  // Capture the incoming data and parse it back to a JS object
   let data = req.body;
   let customerID = parseInt(data['input-log-customer']);
   let guideID = parseInt(data['input-log-guide']);
   let tourID = parseInt(data['input-log-tour']);
 
-  console.log(data);
-
-  // Create the query and run it on the database
   query1 = `INSERT INTO Trip_Logs (  customer_id, guide_id, tour_id) VALUES ('${customerID}','${guideID}', '${tourID}')`;
   db.pool.query(query1, function (error, rows, fields) {
-    // Check to see if there was an error
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
-    }
-
-    // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-    // presents it on the screen
-    else {
+    } else {
       res.redirect('/triplogs');
     }
   });
 });
 
+// TRIP LOG DELETE
 app.delete('/delete-trip-logs-ajax/', function (req, res, next) {
   let data = req.body;
   let logID = parseInt(data.id);
   let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE id = ?`;
 
-  // Run the 1st query
   db.pool.query(deleteTrip_Logs, [logID], function (error, rows, fields) {
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
     } else {
@@ -392,69 +336,57 @@ app.delete('/delete-trip-logs-ajax/', function (req, res, next) {
   });
 });
 
+// REVIEWS
 app.get('/reviews', function (req, res) {
-  let customers = 'SELECT * FROM Customers;'; // Define our query
+  let customers = 'SELECT * FROM Customers;';
   let tours = 'SELECT * FROM Tours;';
-  let reviews = 'SELECT * FROM Reviews;'; // Define our query
+  let reviews = 'SELECT * FROM Reviews;';
 
   db.pool.query(reviews, function (error, rows, fields) {
-    // Execute the query
     let reviews = rows;
 
     db.pool.query(customers, (error, rows, fields) => {
-      // Execute the query
       let customers = rows;
 
       db.pool.query(tours, (error, rows, fields) => {
-        // Save the planets
         let tours = rows;
 
         res.render('reviews', {
           data: reviews,
           results: { customers, tours },
-        }); // Render the index.hbs file, and also send the renderer
+        });
       });
-      // Render the index.hbs file, and also send the renderer
-    }); // Note the call to render() and not send(). Using render() ensures the templating engine
-  }); // will process this file, before sending the finished HTML to the client.
+    });
+  });
 });
 
+// REVIEW CREATE
 app.post('/add-review-form', function (req, res) {
-  // Capture the incoming data and parse it back to a JS object
   let data = req.body;
   let customerID = parseInt(data['input-review-customer']);
   let tourID = parseInt(data['input-review-tour']);
   let rating = parseInt(data['input-review-rating']);
 
-  console.log(data);
-
-  // Create the query and run it on the database
-  query1 = `INSERT INTO Reviews (  date, review, customer_id, tour_id, rating) VALUES ('${data['input-date']}', '${data['input-review']}','${customerID}','${tourID}', '${rating}')`;
+  query1 = `INSERT INTO Reviews (  date, review, customer_id, tour_id, rating) VALUES ('${data['input-date']}', 
+  '${data['input-review']}','${customerID}','${tourID}', '${rating}')`;
   db.pool.query(query1, function (error, rows, fields) {
-    // Check to see if there was an error
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
-    }
-
-    // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-    // presents it on the screen
-    else {
+    } else {
       res.redirect('/reviews');
     }
   });
 });
 
+// REVIEW DELETE
 app.delete('/delete-review-ajax/', function (req, res, next) {
   let data = req.body;
   let reviewID = parseInt(data.id);
   let deleteReviews = `DELETE FROM Reviews WHERE id = ?`;
 
-  // Run the 1st query
   db.pool.query(deleteReviews, [reviewID], function (error, rows, fields) {
     if (error) {
-      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
       console.log(error);
       res.sendStatus(400);
     } else {
@@ -463,14 +395,10 @@ app.delete('/delete-review-ajax/', function (req, res, next) {
   });
 });
 
-/*
-    LISTENER
-*/
+// LISTENER
 app.listen(PORT, function () {
-  // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+  var hostname = os.hostname();
   console.log(
-    'Express started on http://localhost:' +
-      PORT +
-      '; press Ctrl-C to terminate.'
+    `Server running at http://${hostname}:${PORT}/. Press Ctrl-C to terminate...`
   );
 });
