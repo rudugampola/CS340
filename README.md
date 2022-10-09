@@ -2,7 +2,8 @@
 INTRODUCTION TO DATABASES (CS_340_400_F2022)
 
 
-<img align="right" src="![goat](https://user-images.githubusercontent.com/28117713/194739527-557bc7be-7d9d-4ff0-ac14-f87150edffdf.png)">
+![goat](https://user-images.githubusercontent.com/28117713/194739527-557bc7be-7d9d-4ff0-ac14-f87150edffdf.png)
+
 Welcome to GOAT 🐐
 Gone On A Trip (GOAT)® is a traveling agency that provides tours for travel enthusiasts. GOAT provides tour guides in 12 different locations throughout the globe. GOAT is looking to build a database to help keep track of logs that contain information regarding a tour a customer goes on, as well as keep track of reviews of customers of a particular trip. The company will be able to track customer information and assign a guide to each customer, while customers are asked to review the tour at the end of their tours.
 
