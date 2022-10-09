@@ -9,7 +9,7 @@
         know what each column means when the page renders }}
     <tr>
       <th>
-        Id
+        Review Id
       </th>
       <th>
         Date
@@ -18,10 +18,10 @@
         Review
       </th>
       <th>
-        Customer Id
+        Customer
       </th>
       <th>
-        Tour Id
+        Tour
       </th>
       <th>
         Rating
@@ -47,10 +47,10 @@
           {{this.review}}
         </td>
         <td>
-          {{this.customer_id}}
+          {{this.customerName}}
         </td>
         <td>
-          {{this.tour_id}}
+          {{this.tourName}}
         </td>
         <td>
           {{this.rating}}
@@ -96,7 +96,7 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-review" id="input-review" required />
+          <textarea name="input-review" id="input-review" required></textarea>
         </td>
         <td>
           *Required

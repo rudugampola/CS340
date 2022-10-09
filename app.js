@@ -299,16 +299,45 @@ app.get('/triplogs', function (req, res) {
 
     db.pool.query(customers, (error, rows, fields) => {
       let customers = rows;
+      // Map customer id to customer name
+      let customerMap = {};
+      customers.map((customer) => {
+        let id = parseInt(customer.id, 10);
+        customerMap[id] = customer['fname'] + ' ' + customer['lname'];
+      });
+
+      // console.log(customerMap);
 
       db.pool.query(guides, (error, rows, fields) => {
         let guides = rows;
+        // Map guide id to guide name
+        let guideMap = new Map();
+        guides.forEach((guide) => {
+          guideMap.set(guide.id, guide.fname + ' ' + guide.lname);
+        });
+        // console.log(guideMap);
 
         db.pool.query(tours, (error, rows, fields) => {
           let tours = rows;
+          // Map tour id to tour name
+          let tourMap = new Map();
+          tours.forEach((tour) => {
+            tourMap.set(tour.id, tour.name);
+          });
+          // console.log(tourMap);
 
+          logs = logs.map((customer) => {
+            return Object.assign(customer, {
+              customerName: customerMap[customer.customer_id],
+              guideName: guideMap.get(customer.guide_id),
+              tourName: tourMap.get(customer.tour_id),
+            });
+          });
           res.render('triplogs', {
             data: logs,
             results: { customers, guides, tours },
+            // Send maps to client side
+            maps: { customerMap, guideMap, tourMap },
           });
         });
       });
@@ -362,8 +391,26 @@ app.get('/reviews', function (req, res) {
     db.pool.query(customers, (error, rows, fields) => {
       let customers = rows;
 
+      let customerMap = {};
+      customers.map((customer) => {
+        let id = parseInt(customer.id, 10);
+        customerMap[id] = customer['fname'] + ' ' + customer['lname'];
+      });
+
       db.pool.query(tours, (error, rows, fields) => {
         let tours = rows;
+
+        let tourMap = new Map();
+        tours.forEach((tour) => {
+          tourMap.set(tour.id, tour.name);
+        });
+
+        reviews = reviews.map((review) => {
+          return Object.assign(review, {
+            customerName: customerMap[review.customer_id],
+            tourName: tourMap.get(review.tour_id),
+          });
+        });
 
         res.render('reviews', {
           data: reviews,

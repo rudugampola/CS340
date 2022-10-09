@@ -9,16 +9,16 @@
         know what each column means when the page renders }}
     <tr>
       <th>
-        Id
+        Log Id
       </th>
       <th>
-        Customer Id
+        Customer
       </th>
       <th>
-        Guide Id
+        Guide
       </th>
       <th>
-        Tour Id
+        Tour
       </th>
       <th>
         Delete
@@ -35,13 +35,14 @@
           {{this.id}}
         </td>
         <td>
-          {{this.customer_id}}
+          {{!getCustomerName helper parameters are the customer_id and the maps.customerMap array}}
+          {{this.customerName}}
         </td>
         <td>
-          {{this.guide_id}}
+          {{this.guideName}}
         </td>
         <td>
-          {{this.tour_id}}
+          {{this.tourName}}
         </td>
         <td>
           <button onclick="deleteTrip_Logs({{this.id}})">
@@ -52,8 +53,10 @@
     {{/each}}
   </tbody>
 </table>
+<pre>
+  {{maps.CustomerMap}}
+</pre>
 
-<script src="/js/delete.js"></script>
 <br />
 
 <!-- /views/index.hbs -->
@@ -145,3 +148,5 @@
 </div>
 
 <br />
+
+<script src="/js/delete.js"></script>
