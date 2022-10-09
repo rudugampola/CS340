@@ -30,9 +30,17 @@ app.get('/', function (req, res) {
 
 // CUSTOMERS
 app.get('/customers', function (req, res) {
-  let customers = 'SELECT * FROM Customers;';
+  // Search by query string lname
+  let customers;
+  if (req.query.lname === undefined) {
+    customers = 'SELECT * FROM Customers;';
+  } else {
+    customers = `SELECT * FROM Customers WHERE lname LIKE '${req.query.lname}%';`;
+  }
+
+  // let customers = 'SELECT * FROM Customers;';
   db.pool.query(customers, function (error, rows, fields) {
-    res.render('customers', { data: rows });
+    return res.render('customers', { data: rows });
   });
 });
 
@@ -198,8 +206,14 @@ app.put('/put-tour-ajax', function (req, res, next) {
 
 // GUIDES
 app.get('/guides', function (req, res) {
-  let query1 = 'SELECT * FROM Guides;';
-  db.pool.query(query1, function (error, rows, fields) {
+  let guides;
+  if (req.query.lname === undefined) {
+    guides = 'SELECT * FROM Guides;';
+  } else {
+    guides = `SELECT * FROM Guides WHERE lname LIKE '${req.query.lname}%';`;
+  }
+
+  db.pool.query(guides, function (error, rows, fields) {
     res.render('guides', { data: rows });
   });
 });

@@ -5,14 +5,28 @@ html {
     min-height: 100%;
 }
 
+
 body {
     /*rgb(198, 236, 248)  */
     /* background: linear-gradient(to left bottom, rgb(198, 236, 248), rgb(255, 255, 255)); */
     background: #f08725;
     color: #184b5a;
-    margin: 1%;
-    font-size: 16px;
-    height: 100%;
+    /* margin: 1%; */
+    /* font-size: 16px; */
+    /* height: 100%; */
+
+    /* line-height: 1.6; */
+    /* font-weight: 300; */
+    font-family: 'Lato', sans-serif;
+    padding: 1.5rem;
+    /* min-height: 100vh; */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .main-table {
@@ -127,4 +141,75 @@ input[type="tel"] {
 textarea {
     width: 150px;
     ;
+}
+
+.footer {
+    background-color: #f08725;
+    padding: 1rem 2rem 1.5rem 0.15rem;
+    /* font-size: 1.4rem; */
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 0.75rem;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 50em) {
+    .footer {
+        grid-template-columns: 1fr;
+        grid-row-gap: 1.25rem;
+        justify-items: center;
+    }
+}
+
+.footer__logo {
+    grid-row: 1 / 3;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
+
+@media only screen and (max-width: 50em) {
+    .footer__logo {
+        grid-row: 1;
+    }
+}
+
+.footer__logo img {
+    height: 3rem;
+}
+
+.footer__nav {
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: end;
+}
+
+.footer__nav li {
+    margin-left: 1.5rem;
+}
+
+.footer__nav a {
+    color: #184b5a;
+    text-decoration: none !important;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.footer__nav a:hover,
+.footer__nav a:active {
+    color: #ffffff;
+}
+
+.footer__copyright {
+    justify-self: end;
+    color: #184b5a;
+}
+
+@media only screen and (max-width: 50em) {
+    .footer__copyright {
+        justify-self: center;
+    }
 }

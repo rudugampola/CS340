@@ -74,7 +74,21 @@
 <script src="/js/delete.js"></script>
 <br />
 
-<!-- /views/index.hbs -->
+<div class="section">
+  <h3 class="h3-create">
+    Search Guides
+  </h3>
+  <form id="search-guide" method="GET" action="/guides">
+    <label for="input-lname">
+      Search by Last Name:
+    </label>
+    <input type="text" name="lname" id="input-lname-search" />
+
+    <input type="submit" />
+    <input type="reset" />
+  </form>
+</div>
+
 <div class="section">
   <h3 class="h3-create">
     Create Guide
