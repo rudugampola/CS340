@@ -119,7 +119,7 @@ function deleteTourRow(tourID) {
   }
 }
 
-function deleteTrip_Logs(tripID) {
+function deleteTripLogs(tripID) {
   // Put our data we want to send in a javascript object
   let data = {
     id: tripID,

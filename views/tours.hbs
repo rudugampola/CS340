@@ -68,8 +68,8 @@
           {{this.date}} 
         </td>
         <td>
-          <button onclick="deleteTour({{this.id}})">
-            Delete
+          <button class="btn btn-danger" onclick="deleteTour({{this.id}})">
+            Delete <i class="fa-solid fa-trash"></i>
           </button>
         </td>
       </tr>
@@ -98,6 +98,7 @@
             name="input-tour-name"
             id="input-tour-name"
             required
+             placeholder="Tour Name"
           />
         </td>
         <td>
@@ -117,6 +118,7 @@
             name="input-difficulty"
             id="input-difficulty"
             required
+            placeholder="Tour Difficulty"
           />
         </td>
         <td>
@@ -131,7 +133,8 @@
           </label>
         </td>
         <td>
-          <input type="number" name="input-price" id="input-price" required />
+          <input type="number" name="input-price" id="input-price" required 
+          placeholder="Price"/>
         </td>
         <td>
           *Required
@@ -144,7 +147,7 @@
             Tour Description:
           </label>
         </td>
-          <td><textarea name="input-description" id="input-description" required></textarea></td>
+          <td><textarea name="input-description" id="input-description" required placeholder="Tour Description"></textarea></td>
         <td>
           *Required
         </td>
@@ -162,6 +165,7 @@
             name="input-location"
             id="input-location"
             required
+            placeholder="Tour Location"
           />
         </td>
         <td>
@@ -191,15 +195,15 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-cover" id="input-cover" />
+          <input type="text" name="input-cover" id="input-cover" placeholder="Cover Image"/>
         </td>
       </tr>
 
     </table>
 
     <div class="form-btns">
-      <input type="submit" />
-      <input type="reset" />
+      <input type="submit" class="btn btn-success"/>
+      <input type="reset" class="btn btn-danger"/>
     </div>
   </form>
 </div>
@@ -242,7 +246,7 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-name" id="update-name" required />
+          <input type="text" name="update-name" id="update-name" required placeholder="Update Tour Name"/>
         </td>
         <td>
           *Required
@@ -256,7 +260,7 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-difficulty" id="update-difficulty" required />
+          <input type="text" name="update-difficulty" id="update-difficulty" required placeholder="Update Difficulty"/>
         </td>
         <td>
           *Required
@@ -270,7 +274,7 @@
           </label>
         </td>
         <td>
-          <input type="number" name="update-price" id="update-price" required />
+          <input type="number" name="update-price" id="update-price" required placeholder="Update Price" />
         </td>
         <td>
           *Required
@@ -283,7 +287,7 @@
             Tour Description:
           </label>
         </td>
-          <td><textarea name="update-description" id="update-description" required></textarea></td>
+          <td><textarea name="update-description" id="update-description" required placeholder="Update Description"></textarea></td>
         <td>
           *Required
         </td>
@@ -297,7 +301,7 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-location" id="update-location" required />
+          <input type="text" name="update-location" id="update-location" required placeholder="Update Location"/>
         </td>
         <td>
           *Required
@@ -312,7 +316,7 @@
           </label>
         </td>
         <td>
-          <input type="date" name="update-date" id="update-date" required />
+          <input type="date" name="update-date" id="update-date" required placeholder="Update Date"/>
         </td>
         <td>
           *Required
@@ -326,14 +330,14 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-cover" id="update-cover" />
+          <input type="text" name="update-cover" id="update-cover" placeholder="Update Image"/>
         </td>
       </tr>
 
     </table>
     <div class="form-btns">
-      <input type="submit" />
-      <input type="reset" />
+      <input type="submit" class="btn btn-success"/>
+      <input type="reset" class="btn btn-danger"/>
     </div>
   </form>
 </div>

@@ -56,8 +56,9 @@
           {{this.rating}}
         </td>
         <td>
-          <button onclick="deleteReview({{this.id}})">
+          <button class="btn btn-danger" onclick="deleteReview({{this.id}})">
             Delete
+            <i class="fa-solid fa-trash"></i>
           </button>
         </td>
       </tr>
@@ -96,7 +97,12 @@
           </label>
         </td>
         <td>
-          <textarea name="input-review" id="input-review" required></textarea>
+          <textarea
+            name="input-review"
+            id="input-review"
+            required
+            placeholder="Review"
+          ></textarea>
         </td>
         <td>
           *Required
@@ -165,6 +171,7 @@
             name="input-review-rating"
             id="input-review-rating"
             required
+            placeholder="Rating 1-5"
           />
         </td>
         <td>
@@ -174,8 +181,8 @@
     </table>
 
     <div class="form-btns">
-      <input type="submit" />
-      <input type="reset" />
+      <input type="submit" class="btn btn-success" />
+      <input type="reset" class="btn btn-danger" />
     </div>
   </form>
 </div>

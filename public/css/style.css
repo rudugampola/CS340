@@ -1,6 +1,7 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* GLOBAL */
 
+
 html {
     min-height: 100%;
 }
@@ -9,7 +10,7 @@ html {
 body {
     /*rgb(198, 236, 248)  */
     /* background: linear-gradient(to left bottom, rgb(198, 236, 248), rgb(255, 255, 255)); */
-    background: #f08725;
+    background-color: #f08725;
     color: #184b5a;
     /* margin: 1%; */
     /* font-size: 16px; */

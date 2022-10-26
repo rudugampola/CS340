@@ -70,10 +70,10 @@ app.post('/add-customer-form', function (req, res) {
 app.delete('/delete-customer-ajax/', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
-  let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE customer_id = ?`;
+  let deleteTripLogs = `DELETE FROM TripLogs WHERE customer_id = ?`;
   let deleteCustomers = `DELETE FROM Customers WHERE id = ?`;
 
-  db.pool.query(deleteTrip_Logs, [customerID], function (error, rows, fields) {
+  db.pool.query(deleteTripLogs, [customerID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
@@ -155,10 +155,10 @@ app.post('/add-tour-form', function (req, res) {
 app.delete('/delete-tour-ajax/', function (req, res, next) {
   let data = req.body;
   let tourID = parseInt(data.id);
-  let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE id = ?`;
+  let deleteTripLogs = `DELETE FROM TripLogs WHERE id = ?`;
   let deleteTours = `DELETE FROM Tours WHERE id = ?`;
 
-  db.pool.query(deleteTrip_Logs, [tourID], function (error, rows, fields) {
+  db.pool.query(deleteTripLogs, [tourID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
@@ -238,10 +238,10 @@ app.post('/add-guide-form', function (req, res) {
 app.delete('/delete-guide-ajax/', function (req, res, next) {
   let data = req.body;
   let guideID = parseInt(data.id);
-  let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE guide_id = ?`;
+  let deleteTripLogs = `DELETE FROM TripLogs WHERE guide_id = ?`;
   let deleteGuides = `DELETE FROM Guides WHERE id = ?`;
 
-  db.pool.query(deleteTrip_Logs, [guideID], function (error, rows, fields) {
+  db.pool.query(deleteTripLogs, [guideID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
@@ -292,7 +292,7 @@ app.get('/triplogs', function (req, res) {
   let customers = 'SELECT * FROM Customers;';
   let guides = 'SELECT * FROM Guides;';
   let tours = 'SELECT * FROM Tours;';
-  let logs = 'SELECT * FROM Trip_Logs;';
+  let logs = 'SELECT * FROM TripLogs;';
 
   db.pool.query(logs, function (error, rows, fields) {
     let logs = rows;
@@ -352,7 +352,7 @@ app.post('/add-log-form', function (req, res) {
   let guideID = parseInt(data['input-log-guide']);
   let tourID = parseInt(data['input-log-tour']);
 
-  query1 = `INSERT INTO Trip_Logs (  customer_id, guide_id, tour_id) VALUES ('${customerID}','${guideID}', '${tourID}')`;
+  query1 = `INSERT INTO TripLogs (  customer_id, guide_id, tour_id) VALUES ('${customerID}','${guideID}', '${tourID}')`;
   db.pool.query(query1, function (error, rows, fields) {
     if (error) {
       console.log(error);
@@ -367,9 +367,9 @@ app.post('/add-log-form', function (req, res) {
 app.delete('/delete-trip-logs-ajax/', function (req, res, next) {
   let data = req.body;
   let logID = parseInt(data.id);
-  let deleteTrip_Logs = `DELETE FROM Trip_Logs WHERE id = ?`;
+  let deleteTripLogs = `DELETE FROM TripLogs WHERE id = ?`;
 
-  db.pool.query(deleteTrip_Logs, [logID], function (error, rows, fields) {
+  db.pool.query(deleteTripLogs, [logID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);

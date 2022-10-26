@@ -56,11 +56,9 @@
           {{this.photo}}
         </td>
         <td>
-          <button
-            class=".btn .btn--green"
-            onclick="deleteCustomer({{this.id}})"
-          >
+          <button class="btn btn-danger" onclick="deleteCustomer({{this.id}})">
             Delete
+            <i class="fa-solid fa-trash"></i>
           </button>
         </td>
       </tr>
@@ -78,10 +76,15 @@
     <label for="input-lname">
       Search by Last Name:
     </label>
-    <input type="text" name="lname" id="input-lname-search" />
+    <input
+      type="text"
+      name="lname"
+      id="input-lname-search"
+      placeholder="Last Name..."
+    />
 
-    <input type="submit" />
-    <input type="reset" />
+    <input type="submit" class="btn btn-success" />
+    <input type="reset" class="btn btn-danger" />
   </form>
 </div>
 
@@ -99,7 +102,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-fname" id="input-fname" required />
+          <input
+            type="text"
+            name="input-fname"
+            id="input-fname"
+            required
+            placeholder="First Name"
+          />
         </td>
         <td>
           *Required
@@ -113,7 +122,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-lname" id="input-lname" required />
+          <input
+            type="text"
+            name="input-lname"
+            id="input-lname"
+            required
+            placeholder="Last Name"
+          />
         </td>
         <td>
           *Required
@@ -127,7 +142,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-phone" id="input-phone" required />
+          <input
+            type="text"
+            name="input-phone"
+            id="input-phone"
+            required
+            placeholder="Phone Number"
+          />
         </td>
         <td>
           *Required
@@ -141,7 +162,12 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-email" id="input-email" />
+          <input
+            type="text"
+            name="input-email"
+            id="input-email"
+            placeholder="Email"
+          />
         </td>
       </tr>
 
@@ -152,14 +178,19 @@
           </label>
         </td>
         <td>
-          <input type="text" name="input-photo" id="input-photo" />
+          <input
+            type="text"
+            name="input-photo"
+            id="input-photo"
+            placeholder="Photo"
+          />
         </td>
       </tr>
     </table>
 
     <div class="form-btns">
-      <input type="submit" />
-      <input type="reset" />
+      <input type="submit" class="btn btn-success" />
+      <input type="reset" class="btn btn-danger" />
     </div>
   </form>
 </div>
@@ -202,7 +233,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-fname" id="update-fname" required />
+          <input
+            type="text"
+            name="update-fname"
+            id="update-fname"
+            required
+            placeholder="Update First Name"
+          />
         </td>
         <td>
           *Required
@@ -216,7 +253,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-lname" id="update-lname" required />
+          <input
+            type="text"
+            name="update-lname"
+            id="update-lname"
+            required
+            placeholder="Update Last Name"
+          />
         </td>
         <td>
           *Required
@@ -230,7 +273,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-phone" id="update-phone" required />
+          <input
+            type="text"
+            name="update-phone"
+            id="update-phone"
+            required
+            placeholder="Update Phone"
+          />
         </td>
         <td>
           *Required
@@ -244,7 +293,12 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-email" id="update-email" />
+          <input
+            type="text"
+            name="update-email"
+            id="update-email"
+            placeholder="Update Email"
+          />
         </td>
       </tr>
 
@@ -255,13 +309,18 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-photo" id="update-photo" />
+          <input
+            type="text"
+            name="update-photo"
+            id="update-photo"
+            placeholder="Update Photo"
+          />
         </td>
       </tr>
     </table>
     <div class="form-btns">
-      <input type="submit" />
-      <input type="reset" />
+      <input type="submit" class="btn btn-success" />
+      <input type="reset" class="btn btn-danger" />
     </div>
   </form>
 </div>
