@@ -64,7 +64,11 @@ if (process.argv[2] === '--import') {
   // Import data async function call
   importData();
 } else if (process.argv[2] === '--delete') {
+  // Delete data async function call
   deleteData();
+} else if (process.argv[2] === '--all') {
+  deleteData();
+  importData();
 }
 
 // Run this file from the command line with the following command:

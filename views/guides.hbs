@@ -62,7 +62,11 @@
           {{this.photo}}
         </td>
         <td>
-          <button class="btn btn-danger" onclick="deleteGuide({{this.id}})">
+          <button
+            class="btn btn-danger"
+            type="button"
+            onclick="deleteGuide({{this.id}})"
+          >
             Delete
             <i class="fa-solid fa-trash"></i>
           </button>
@@ -71,6 +75,10 @@
     {{/each}}
   </tbody>
 </table>
+
+<script type="text/javascript">
+  // Pass the id of the guide to delete to the onclick of button in the modal
+</script>
 
 <script src="/js/delete.js"></script>
 <br />
@@ -275,7 +283,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-lname" id="update-lname" required  placeholder="Update Last Name"/>
+          <input
+            type="text"
+            name="update-lname"
+            id="update-lname"
+            required
+            placeholder="Update Last Name"
+          />
         </td>
         <td>
           *Required
@@ -289,7 +303,13 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-phone" id="update-phone" required  placeholder="Update Phone"/>
+          <input
+            type="text"
+            name="update-phone"
+            id="update-phone"
+            required
+            placeholder="Update Phone"
+          />
         </td>
         <td>
           *Required
@@ -303,7 +323,12 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-email" id="update-email"  placeholder="Update Email"/>
+          <input
+            type="text"
+            name="update-email"
+            id="update-email"
+            placeholder="Update Email"
+          />
         </td>
       </tr>
 
@@ -314,7 +339,12 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-title" id="update-title"  placeholder="Update Title"/>
+          <input
+            type="text"
+            name="update-title"
+            id="update-title"
+            placeholder="Update Title"
+          />
         </td>
       </tr>
 
@@ -325,7 +355,12 @@
           </label>
         </td>
         <td>
-          <input type="text" name="update-photo" id="update-photo"  placeholder="Update Photo"/>
+          <input
+            type="text"
+            name="update-photo"
+            id="update-photo"
+            placeholder="Update Photo"
+          />
         </td>
       </tr>
     </table>

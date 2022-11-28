@@ -56,7 +56,12 @@
           {{this.photo}}
         </td>
         <td>
-          <button class="btn btn-danger" onclick="deleteCustomer({{this.id}})">
+          <!-- Button trigger modal -->
+          <button
+            class="btn btn-danger"
+            type="button"
+            onclick="deleteCustomer({{this.id}})"
+          >
             Delete
             <i class="fa-solid fa-trash"></i>
           </button>
@@ -326,13 +331,15 @@
 </div>
 <br />
 
-<script src="/js/delete.js"></script>
-<script src="/js/updateCustomer.js"></script>
-
 <script>
   function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
     updateCustomer(id)
     };
+  
+  // When delete button is clicked, console log the id of the customer to be deleted
 </script>
+
+<script src="/js/delete.js"></script>
+<script src="/js/updateCustomer.js"></script>

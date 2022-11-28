@@ -70,26 +70,14 @@ app.post('/add-customer-form', function (req, res) {
 app.delete('/delete-customer-ajax/', function (req, res, next) {
   let data = req.body;
   let customerID = parseInt(data.id);
-  let deleteTripLogs = `DELETE FROM TripLogs WHERE customer_id = ?`;
   let deleteCustomers = `DELETE FROM Customers WHERE id = ?`;
 
-  db.pool.query(deleteTripLogs, [customerID], function (error, rows, fields) {
+  db.pool.query(deleteCustomers, [customerID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
     } else {
-      db.pool.query(
-        deleteCustomers,
-        [customerID],
-        function (error, rows, fields) {
-          if (error) {
-            console.log(error);
-            res.sendStatus(400);
-          } else {
-            res.sendStatus(204);
-          }
-        }
-      );
+      res.sendStatus(204);
     }
   });
 });
@@ -144,6 +132,7 @@ app.post('/add-tour-form', function (req, res) {
   db.pool.query(query1, function (error, rows, fields) {
     if (error) {
       console.log(error);
+      console.log();
       res.sendStatus(400);
     } else {
       res.redirect('/tours');
@@ -155,22 +144,14 @@ app.post('/add-tour-form', function (req, res) {
 app.delete('/delete-tour-ajax/', function (req, res, next) {
   let data = req.body;
   let tourID = parseInt(data.id);
-  let deleteTripLogs = `DELETE FROM TripLogs WHERE id = ?`;
   let deleteTours = `DELETE FROM Tours WHERE id = ?`;
 
-  db.pool.query(deleteTripLogs, [tourID], function (error, rows, fields) {
+  db.pool.query(deleteTours, [tourID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
     } else {
-      db.pool.query(deleteTours, [tourID], function (error, rows, fields) {
-        if (error) {
-          console.log(error);
-          res.sendStatus(400);
-        } else {
-          res.sendStatus(204);
-        }
-      });
+      res.sendStatus(204);
     }
   });
 });
@@ -238,22 +219,14 @@ app.post('/add-guide-form', function (req, res) {
 app.delete('/delete-guide-ajax/', function (req, res, next) {
   let data = req.body;
   let guideID = parseInt(data.id);
-  let deleteTripLogs = `DELETE FROM TripLogs WHERE guide_id = ?`;
   let deleteGuides = `DELETE FROM Guides WHERE id = ?`;
 
-  db.pool.query(deleteTripLogs, [guideID], function (error, rows, fields) {
+  db.pool.query(deleteGuides, [guideID], function (error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
     } else {
-      db.pool.query(deleteGuides, [guideID], function (error, rows, fields) {
-        if (error) {
-          console.log(error);
-          res.sendStatus(400);
-        } else {
-          res.sendStatus(204);
-        }
-      });
+      res.sendStatus(204);
     }
   });
 });

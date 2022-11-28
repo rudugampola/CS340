@@ -36,7 +36,7 @@
   <tbody>
     {{! For each row, print the id, fname, lname, homeworld and age, in order }}
     {{#each data}}
-      <tr>
+      <tr "data-value"={{this.id}}>
         <td>
           {{this.id}}
         </td>
