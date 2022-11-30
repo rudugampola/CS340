@@ -63,9 +63,10 @@
         </td>
         <td>
           <button
-            class="btn btn-danger"
             type="button"
-            onclick="deleteGuide({{this.id}})"
+            class="btn btn-danger"
+            data-mdb-toggle="modal"
+            data-mdb-target="#exampleModal"
           >
             Delete
             <i class="fa-solid fa-trash"></i>
@@ -76,8 +77,66 @@
   </tbody>
 </table>
 
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Delete Guide Confirmation
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-mdb-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" id="confirm-delete" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+
 <script type="text/javascript">
-  // Pass the id of the guide to delete to the onclick of button in the modal
+  $('#exampleModal').on('shown.bs.modal', function(event) {
+
+    // The reference tag is your anchor tag here
+    var reference_tag = $(event.relatedTarget); 
+    // Clear the modal body
+    $(this).find('.modal-body').html('');
+    // Append to modal-body the name of the guide 
+    var guide_name = reference_tag.parent().parent().children()[1].innerHTML + " " + reference_tag.parent().parent().children()[2].innerHTML;
+    // Append to modal-body the Name of the guide in Bold 
+    $(".modal-body").append("Are you sure you want to delete Guide: " + '<b>' + guide_name + '</b>' + "? This action cannot be undone.");
+    // Get the id of the guide
+    var guide_id = reference_tag.parent().parent().attr('data-value');
+    console.log(guide_id);
+    $('#confirm-delete').click(function() {
+      deleteGuide(guide_id);
+    });
+
+})
 </script>
 
 <script src="/js/delete.js"></script>
@@ -183,6 +242,9 @@
             required
             placeholder="Email"
           />
+        </td>
+        <td>
+          *Required
         </td>
       </tr>
 
