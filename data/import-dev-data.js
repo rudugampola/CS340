@@ -6,6 +6,12 @@ const customers = JSON.parse(
 );
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
 const guides = JSON.parse(fs.readFileSync(`${__dirname}/guides.json`, 'utf-8'));
+const triplogs = JSON.parse(
+  fs.readFileSync(`${__dirname}/triplogs.json`, 'utf-8')
+);
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
+);
 
 // Import JSON data into database
 const importData = async () => {
@@ -39,7 +45,28 @@ const importData = async () => {
     }
   });
 
+  reviews.forEach((review) => {
+    try {
+      db.pool.query('INSERT INTO Reviews SET ?', review, (err, result) => {
+        if (err) throw err;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
+  triplogs.forEach((triplog) => {
+    try {
+      db.pool.query('INSERT INTO TripLogs SET ?', triplog, (err, result) => {
+        if (err) throw err;
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   console.log('Data successfully imported');
+  // process.exit();
 };
 
 // Delete all data from database
@@ -69,6 +96,8 @@ if (process.argv[2] === '--import') {
 } else if (process.argv[2] === '--all') {
   deleteData();
   importData();
+  // Terminate process. Otherwise, the process will not terminate
+  // process.exit();
 }
 
 // Run this file from the command line with the following command:

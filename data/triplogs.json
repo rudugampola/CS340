@@ -1,0 +1,50 @@
+[
+    {
+        "id": "1",
+        "customer_id": "1",
+        "guide_id": "4",
+        "tour_id": "3"
+    },
+    {
+        "id": "2",
+        "customer_id": "2",
+        "guide_id": "4",
+        "tour_id": "3"
+    },
+    {
+        "id": "3",
+        "customer_id": "3",
+        "guide_id": "4",
+        "tour_id": "3"
+    },
+    {
+        "id": "4",
+        "customer_id": "4",
+        "guide_id": "2",
+        "tour_id": "3"
+    },
+    {
+        "id": "5",
+        "customer_id": "5",
+        "guide_id": "1",
+        "tour_id": "3"
+    },
+    {
+        "id": "6",
+        "customer_id": "6",
+        "guide_id": "4",
+        "tour_id": "3"
+    },
+    {
+        "id": "7",
+        "customer_id": "5",
+        "guide_id": "11",
+        "tour_id": "7"
+    },
+    {
+        "id": "8",
+        "customer_id": "2",
+        "guide_id": "16",
+        "tour_id": "5"
+    }
+]

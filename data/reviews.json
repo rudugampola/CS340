@@ -1,0 +1,74 @@
+[
+    {
+        "id": "1",
+        "date": "2019-01-01",
+        "review": "This is a review...because I must!",
+        "customer_id": "1",
+        "tour_id": "1",
+        "rating": "5"
+    },
+    {
+        "id": "2",
+        "date": "2019-01-01",
+        "review": "I don't like this tour",
+        "customer_id": "2",
+        "tour_id": "2",
+        "rating": "1"
+    },
+    {
+        "id": "3",
+        "date": "2019-01-01",
+        "review": "I loved this tour. It was great.",
+        "customer_id": "3",
+        "tour_id": "3",
+        "rating": "5"
+    },
+    {
+        "id": "4",
+        "date": "2019-01-01",
+        "review": "Highly recommended!",
+        "customer_id": "4",
+        "tour_id": "4",
+        "rating": "5"
+    },
+    {
+        "id": "5",
+        "date": "2019-01-01",
+        "review": "Greatest tour ever",
+        "customer_id": "5",
+        "tour_id": "5",
+        "rating": "5"
+    },
+    {
+        "id": "6",
+        "date": "2019-01-01",
+        "review": "Best tour ever",
+        "customer_id": "6",
+        "tour_id": "6",
+        "rating": "5"
+    },
+    {
+        "id": "7",
+        "date": "2019-01-01",
+        "review": "I don't like this tour",
+        "customer_id": "5",
+        "tour_id": "2",
+        "rating": "1"
+    },
+    {
+        "id": "8",
+        "date": "2019-01-01",
+        "review": "This is was an OK Tour",
+        "customer_id": "4",
+        "tour_id": "5",
+        "rating": "5"
+    },
+    {
+        "id": "9",
+        "date": "2019-01-01",
+        "review": "This is a good Tour",
+        "customer_id": "3",
+        "tour_id": "1",
+        "rating": "5"
+    }
+]
